@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>How to Write a Codelab</title>
+  <title>Deploy with GCP</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -22,64 +22,73 @@
 <body>
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
-                  id="how-to-write-a-codelab"
-                  title="How to Write a Codelab"
+                  id="docs"
+                  title="Deploy with GCP"
                   environment="web"
-                  feedback-link="https://zarin.io">
+                  feedback-link="https://github.com/kangyuw/pop_documentation">
     
-      <google-codelab-step label="Overview" duration="1">
+      <google-codelab-step label="Introduction" duration="3">
         <h2 class="checklist" is-upgraded>What You&#39;ll Learn</h2>
+<p>Welcome to TBD!</p>
+<p>Let&#39;s get to know how GCP - Google Cloud Platform help developers to deploy their projects with automatically pipeline.</p>
+<p>This event will walk through the following steps.</p>
 <ul>
-<li>how to set the amount of time each slide will take to finish</li>
-<li>how to include code snippets</li>
-<li>how to hyperlink items</li>
-<li>how to include images</li>
-<li>other stuff</li>
+<li>Create a new project on GCP</li>
+<li>Deploy the microservice on Cloud Run</li>
+<li>Buildup automatic pipeline on Cloud Run</li>
 </ul>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Setting Duration" duration="2">
-        <p>To indicate how long each slide will take to go through, set the <code>Duration</code> under each Heading 2 (i.e. <code>##</code>) to an integer. The integers refer to minutes. If you set <code>Duration: 4</code> then a particular slide will take 4 minutes to complete.</p>
-<p>The total time will automatically be calculated for you and will be displayed on the codelab once you create it.</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Code Snippets" duration="3">
-        <p>To include code snippets you can do a few things.</p>
-<ul>
-<li>Inline highlighting can be done using the tiny tick mark on your keyboard: &#34;`&#34;</li>
-<li>Embedded code</li>
-</ul>
-<h2 is-upgraded>JavaScript</h2>
-<pre><code language="language-javascript" class="language-javascript">{ 
-  key1: &#34;string&#34;, 
-  key2: integer,
-  key3: &#34;string&#34;
+<p>At the end of the event, you have to submit your microservice to the <strong>Leaderboard</strong>.</p>
+<h3 is-upgraded>Leader board</h3>
+<p>The host will send the HTTP POST request. And the microservice should response with the following JSON structure:</p>
+<pre><code language="language-JSON" class="language-JSON">{
+  &#34;username&#34;: &#34;Kang&#34;, //The registered username
+  &#34;flag&#34;: &#34;jplOsDIaFLhcMRlS&#34; //The 16-word random generated string
 }
 </code></pre>
-<h2 is-upgraded>Java</h2>
-<pre><code language="language-java" class="language-java">for (statement 1; statement 2; statement 3) {
-  // code block to be executed
-}
-</code></pre>
+<p>After the host receive the JSON response. It will update the leaderboard.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Hyperlinking and Embedded Images" duration="1">
-        <h2 is-upgraded>Hyperlinking</h2>
-<p><a href="https://www.youtube.com/user/iamhalsey/playlists" target="_blank">Youtube - Halsey Playlists</a></p>
-<h2 is-upgraded>Images</h2>
-<p class="image-container"><img alt="alt-text-here" src="img/54e3971937b7e379.jpg"></p>
+      <google-codelab-step label="Login to Google Cloud" duration="5">
+        <p>To be able to deploy your microservice on Cloud Run you will need to login to Google Cloud. We will apply a credit to your account and you won&#39;t need to enter a credit card. It is usually less problematic to use a personal account (e.g. gmail.com) instead of a GSuite account because sometimes GSuite admins prevent their users from using certain Google Cloud features. Also, the web console we will be using should work great with Chrome or Firefox but might have issues in Safari.</p>
+<p><a href="http://www.google.com" target="_blank">Get started and login</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Other Stuff" duration="1">
-        <p>Checkout the official documentation here: <a href="https://github.com/googlecodelabs/tools/blob/master/FORMAT-GUIDE.md" target="_blank">Codelab Formatting Guide</a></p>
+      <google-codelab-step label="Create a new Project" duration="0">
+        <p>This section covers everything you need to do to get started with this event.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Deploy the Microservice" duration="0">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Make Changes" duration="0">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Join the Leaderboard" duration="0">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Delivery" duration="0">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Congratulations" duration="0">
+        <p>Congratulations, you&#39;ve successfully built and deployed a microservice. Good luck!</p>
+<h3 is-upgraded>Reference Docs</h3>
+<ul>
+<li><a href="https://cloud.google.com/run/docs/" target="_blank">Cloud Run Docs</a></li>
+</ul>
 
 
       </google-codelab-step>

@@ -3,23 +3,23 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2021-05-26T14:47:34-04:00",
-  "id": "how-to-write-a-codelab",
+  "updated": "2021-05-26T18:04:12-04:00",
+  "id": "docs",
   "duration": 8,
-  "title": "How to Write a Codelab",
-  "authors": "Zarin",
-  "summary": "How to Write a Codelab",
-  "source": "how-to-write-a-codelab.md",
+  "title": "Deploy with GCP",
+  "authors": "Kang",
+  "summary": "Deploy with GCP",
+  "source": "pop-instruction.md",
   "theme": "",
   "status": [
     "published"
   ],
   "category": [
-    "sample"
+    "tutorial"
   ],
   "tags": [
-    "medium"
+    "rpt"
   ],
-  "feedback": "https://zarin.io",
-  "url": "how-to-write-a-codelab"
+  "feedback": "https://github.com/kangyuw/pop_documentation",
+  "url": "docs"
 }
