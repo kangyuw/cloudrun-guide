@@ -118,8 +118,54 @@ project = &lt;PROJECT_ID&gt;
 
       </google-codelab-step>
     
-      <google-codelab-step label="Deploy the Microservice" duration="0">
-        
+      <google-codelab-step label="Deploy Your Microservice" duration="0">
+        <p>You can build your microservice with any technology and deploy it anywhere as long as it is reachable publicly and conforms to the API. But to make things easy we will help you start from a sample service and deploy it on Cloud Run.</p>
+<h3 is-upgraded>Pick Your Sample to Start with</h3>
+<p>There are numerous sample microservices you can start from:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Sample</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td><td colspan="1" rowspan="1"><p>Deploy</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="go" target="_blank">go</a></p>
+</td><td colspan="1" rowspan="1"><p>Go Lang</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/go" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="java-quarkus" target="_blank">java-quarkus</a></p>
+</td><td colspan="1" rowspan="1"><p>Java + Quarkus</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/java-quarkus" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="java-springboot" target="_blank">java-springboot</a></p>
+</td><td colspan="1" rowspan="1"><p>Java + Spring Boot</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/java-springboot" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="kotlin-micronaut" target="_blank">kotlin-micronaut</a></p>
+</td><td colspan="1" rowspan="1"><p>Kotlin + Micronaut</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-micronaut" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="kotlin-quarkus" target="_blank">kotlin-quarkus</a></p>
+</td><td colspan="1" rowspan="1"><p>Kotlin + Quarkus</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-quarkus" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="kotlin-springboot" target="_blank">kotlin-springboot</a></p>
+</td><td colspan="1" rowspan="1"><p>Kotlin + Spring Boot</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-springboot" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="nodejs" target="_blank">nodejs</a></p>
+</td><td colspan="1" rowspan="1"><p>Node.js</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/nodejs" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="python" target="_blank">python</a></p>
+</td><td colspan="1" rowspan="1"><p>Python + Flask</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/python" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="scala-play" target="_blank">scala-play</a></p>
+</td><td colspan="1" rowspan="1"><p>Scala + Play Framework</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/scala-play" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+</table>
+<p>After you decide which sample to start with, click the &#34;Deploy on Cloud Run&#34; button above. This will launch Cloud Shell (a web-based console to a virtual machine in the cloud) where the source will be cloned, then built into a deployable package (a docker container image), which is then uploaded to the Google Container Registry, and then deployed on Cloud Run.</p>
+
 
       </google-codelab-step>
     

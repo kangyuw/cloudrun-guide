@@ -141,7 +141,65 @@ Updated property [core/project].
 OK, now you are ready to deploy the microservice!
 
 <!-- ------------------------ -->
-## Deploy the Microservice
+## Deploy Your Microservice
+
+You can build your microservice with any technology and deploy it anywhere as long as it is reachable publicly and conforms to the API. But to make things easy we will help you start from a sample service and deploy it on Cloud Run.
+
+#### Pick Your Sample to Start with
+
+<!-- TODO: This part should contain our own setup samples -->
+There are numerous sample microservices you can start from:
+
+|Sample|Description|Deploy|
+|---|---|---|
+|[go](go)|Go Lang|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/go)|
+|[java-quarkus](java-quarkus)|Java + Quarkus|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/java-quarkus)|
+|[java-springboot](java-springboot)|Java + Spring Boot|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/java-springboot)|
+|[kotlin-micronaut](kotlin-micronaut)|Kotlin + Micronaut|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-micronaut)|
+|[kotlin-quarkus](kotlin-quarkus)|Kotlin + Quarkus|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-quarkus)|
+|[kotlin-springboot](kotlin-springboot)|Kotlin + Spring Boot|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-springboot)|
+|[nodejs](nodejs)|Node.js|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/nodejs)|
+|[python](python)|Python + Flask|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/python)|
+|[scala-play](scala-play)|Scala + Play Framework|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/scala-play)|
+
+After you decide which sample to start with, click the "Deploy on Cloud Run" button above. This will launch [Cloud Shell](https://cloud.google.com/shell) (a web-based console to a virtual machine in the cloud) where the source will be cloned, then built into a deployable package (a docker container image), which is then uploaded to the [Google Container Registry](https://cloud.google.com/container-registry), and then deployed on [Cloud Run](https://cloud.google.com/run).
+
+When asked, specify the ```us-central1``` region.
+
+The screenshot below shows Cloud Shell output for microservice build and deployment
+
+![welcome](assets/deploy-output.png)
+
+#### Verify the microservice works
+
+In Cloud Shell you can make a request to your newly deployed microservice, replacing YOUR_SERVICE_URL with the URL for your service (which is in Cloud Shell after the "Your application is now live here" line):
+
+<!-- TODO: This part should be replace by simple http post request -->
+
+``` console
+curl -d '{
+  "_links": {
+    "self": {
+      "href": "https://foo.com"
+    }
+  },
+  "arena": {
+    "dims": [4,3],
+    "state": {
+      "https://foo.com": {
+        "x": 0,
+        "y": 0,
+        "direction": "N",
+        "wasHit": false,
+        "score": 0
+      }
+    }
+  }
+}' -H "Content-Type: application/json" -X POST -w "\n" \
+  https://YOUR_SERVICE_URL
+```
+
+You should see the response string of either ```F```, ```L```, ```R```, or ```T```.
 
 <!-- ------------------------ -->
 ## Make Changes
