@@ -164,7 +164,34 @@ project = &lt;PROJECT_ID&gt;
 </td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/scala-play" target="_blank">Run on Google Cloud</a></p>
 </td></tr>
 </table>
-<p>After you decide which sample to start with, click the &#34;Deploy on Cloud Run&#34; button above. This will launch Cloud Shell (a web-based console to a virtual machine in the cloud) where the source will be cloned, then built into a deployable package (a docker container image), which is then uploaded to the Google Container Registry, and then deployed on Cloud Run.</p>
+<p>After you decide which sample to start with, click the &#34;Deploy on Cloud Run&#34; button above. This will launch <a href="https://cloud.google.com/shell" target="_blank">Cloud Shell</a> (a web-based console to a virtual machine in the cloud) where the source will be cloned, then built into a deployable package (a docker container image), which is then uploaded to the <a href="https://cloud.google.com/container-registry" target="_blank">Google Container Registry</a>, and then deployed on <a href="https://cloud.google.com/run" target="_blank">Cloud Run</a>.</p>
+<p>When asked, specify the <code>us-central1</code> region.</p>
+<p>The screenshot below shows Cloud Shell output for microservice build and deployment</p>
+<p class="image-container"><img alt="welcome" src="img/b596945caf1fce3d.png"></p>
+<h3 is-upgraded>Verify the microservice works</h3>
+<p>In Cloud Shell you can make a request to your newly deployed microservice, replacing YOUR_SERVICE_URL with the URL for your service (which is in Cloud Shell after the &#34;Your application is now live here&#34; line):</p>
+<pre>curl -d &#39;{
+  &#34;_links&#34;: {
+    &#34;self&#34;: {
+      &#34;href&#34;: &#34;https://foo.com&#34;
+    }
+  },
+  &#34;arena&#34;: {
+    &#34;dims&#34;: [4,3],
+    &#34;state&#34;: {
+      &#34;https://foo.com&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 0,
+        &#34;direction&#34;: &#34;N&#34;,
+        &#34;wasHit&#34;: false,
+        &#34;score&#34;: 0
+      }
+    }
+  }
+}&#39; -H &#34;Content-Type: application/json&#34; -X POST -w &#34;\n&#34; \
+  https://YOUR_SERVICE_URL
+</pre>
+<p>You should see the response string of either <code>F</code>, <code>L</code>, <code>R</code>, or <code>T</code>.</p>
 
 
       </google-codelab-step>
