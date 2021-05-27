@@ -59,6 +59,61 @@
     
       <google-codelab-step label="Create a new Project" duration="0">
         <p>This section covers everything you need to do to get started with this event.</p>
+<h2 is-upgraded>Environment setup</h2>
+<p>Sign in to <a href="console.cloud.google.com" target="_blank">Cloud Console</a> and create a new project.</p>
+<p class="image-container"><img alt="create-1" src="img/23e5a29e902aa158.png"></p>
+<p class="image-container"><img alt="create-2" src="img/518f23e2c0aa154.png"></p>
+<p class="image-container"><img alt="create-3" src="img/ce1662eadd00a561.png"></p>
+<p>Remember the project ID, a unique name across all Google Cloud projects. It will be referred to later in this codelab as <code>PROJECT_ID</code>.</p>
+<p>Be sure to follow any instructions in the &#34;Cleaning up&#34; section which advices you how to shut down resources so you don&#39;t incur billing beyond this event. New users of Google Cloud are eligible for the <a href="https://cloud.google.com/free" target="_blank">$300 USD Free Trial</a> program.</p>
+<h2 is-upgraded>Start Cloud Shell</h2>
+<p>In this event you&#39;re going to work in a <a href="https://cloud.google.com/shell" target="_blank">Cloud Shell</a> session, which is a command interpreter hosted by a virtual machine in Google&#39;s cloud. You could just as easily run this section locally on your own computer, but using Cloud Shell gives everyone access to a reproducible experience in a consistent environment.</p>
+<aside class="special"><p><strong>Note</strong>: The first time you make a request in Cloud Shell requiring authorization, you will see an &#34;Authorize Cloud Shell&#34; dialog like the one shown below, to which you may safely click the &#34;Authorize&#34; button.</p>
+</aside>
+<p class="image-container"><img alt="authorize" src="img/3992f407cd690b0.png"></p>
+<h3 is-upgraded>Activate Cloud Shell</h3>
+<ol type="1">
+<li>From the Cloud Console, click Activate Cloud Shell</li>
+</ol>
+<p class="image-container"><img alt="activate" src="img/1b59fe844e848297.png"></p>
+<p>If you&#39;ve never started Cloud Shell before, you&#39;re presented with an intermediate screen (below the fold) describing what it is. If that&#39;s the case, click <strong>Continue</strong> (and you won&#39;t ever see it again). Here&#39;s what that one-time screen looks like:</p>
+<p class="image-container"><img alt="continue" src="img/7f6ef20edfeca0de.png"></p>
+<p>It should only take a few moments to provision and connect to Cloud Shell.</p>
+<p class="image-container"><img alt="welcome" src="img/fbe3a0674c982259.png"></p>
+<p>This virtual machine is loaded with all the development tools you need. It offers a persistent 5GB home directory and runs in Google Cloud, greatly enhancing network performance and authentication. Much, if not all, of your work in this codelab can be done with simply a browser or your Chromebook.</p>
+<p>Once connected to Cloud Shell, you should see that you are already authenticated and that the project is already set to your project ID.</p>
+<ol type="1">
+<li>Run the following command in Cloud Shell to confirm that you are authenticated:</li>
+</ol>
+<pre><code language="language-bash" class="language-bash">gcloud auth list
+
+</code></pre>
+<p><strong>Command output</strong></p>
+<pre> Credentialed Accounts
+ACTIVE  ACCOUNT
+*       &lt;my_account&gt;@&lt;my_domain.com&gt;
+
+To set the active account, run:
+    $ gcloud config set account `ACCOUNT`
+</pre>
+<aside class="special"><p><strong>Note</strong>: For more information about <code>gcloud</code> command-line tool, see <a href="https://cloud.google.com/sdk/gcloud/" target="_blank">gcloud command-line tool overview</a>.</p>
+</aside>
+<ol type="1">
+<li>Run the following command in Cloud Shell to confirm that the gcloud command knows about your project:</li>
+</ol>
+<pre><code language="language-bash" class="language-bash">gcloud config list project
+</code></pre>
+<p><strong>Command output</strong></p>
+<pre>[core]
+project = &lt;PROJECT_ID&gt;
+</pre>
+<p>If it is not, you can set it with this command:</p>
+<pre><code language="language-bash" class="language-bash">gcloud config set project &lt;PROJECT_ID&gt;
+</code></pre>
+<p><strong>Command output</strong></p>
+<pre>Updated property [core/project].
+</pre>
+<p>OK, now you are ready to deploy the microservice!</p>
 
 
       </google-codelab-step>
