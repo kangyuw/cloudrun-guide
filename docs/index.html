@@ -29,7 +29,7 @@
     
       <google-codelab-step label="Introduction" duration="3">
         <h2 class="checklist" is-upgraded>What You&#39;ll Learn</h2>
-<p>Welcome to TBD!</p>
+<p>Welcome to <code>TBD</code>!</p>
 <p>Let&#39;s get to know how GCP - Google Cloud Platform help developers to deploy their projects with automatically pipeline.</p>
 <p>This event will walk through the following steps.</p>
 <ul>
@@ -38,14 +38,36 @@
 <li>Buildup automatic pipeline on Cloud Run</li>
 </ul>
 <p>At the end of the event, you have to submit your microservice to the <strong>Leaderboard</strong>.</p>
-<h3 is-upgraded>Leader board</h3>
+<h3 is-upgraded>Microservice Rainbow Rumpus</h3>
 <p>The host will send the HTTP POST request. And the microservice should response with the following JSON structure:</p>
 <pre><code language="language-JSON" class="language-JSON">{
-  &#34;username&#34;: &#34;Kang&#34;, //The registered username
-  &#34;flag&#34;: &#34;jplOsDIaFLhcMRlS&#34; //The 16-word random generated string
+  &#34;_links&#34;: {
+    &#34;self&#34;: {
+      &#34;href&#34;: &#34;https://YOUR_SERVICE_URL&#34;
+    }
+  },
+  &#34;arena&#34;: {
+    &#34;dims&#34;: [4,3], // width, height
+    &#34;state&#34;: {
+      &#34;https://A_PLAYERS_URL&#34;: {
+        &#34;x&#34;: 0, // zero-based x position, where 0 = left
+        &#34;y&#34;: 0, // zero-based y position, where 0 = top
+        &#34;direction&#34;: &#34;N&#34;, // N = North, W = West, S = South, E = East
+        &#34;wasHit&#34;: false,
+        &#34;score&#34;: 0
+      }
+      ... // also you and the other players
+    }
+  }
 }
 </code></pre>
-<p>After the host receive the JSON response. It will update the leaderboard.</p>
+<p>Your HTTP response must be status code 200 (OK) with a response body containing your next move, encoded as a single uppercase character of either:</p>
+<pre>F &lt;- move Forward
+R &lt;- turn Right
+L &lt;- turn Left
+T &lt;- Throw
+</pre>
+<p>That&#39;s all there is to it! Let&#39;s walk through deploying a microservice on Cloud Run, a Google Cloud service for running microservices and other applications.</p>
 
 
       </google-codelab-step>
@@ -85,9 +107,9 @@
 <ol type="1">
 <li>Run the following command in Cloud Shell to confirm that you are authenticated:</li>
 </ol>
-<pre><code language="language-bash" class="language-bash">gcloud auth list
+<pre>gcloud auth list
 
-</code></pre>
+</pre>
 <p><strong>Command output</strong></p>
 <pre> Credentialed Accounts
 ACTIVE  ACCOUNT
@@ -101,15 +123,15 @@ To set the active account, run:
 <ol type="1">
 <li>Run the following command in Cloud Shell to confirm that the gcloud command knows about your project:</li>
 </ol>
-<pre><code language="language-bash" class="language-bash">gcloud config list project
-</code></pre>
+<pre>gcloud config list project
+</pre>
 <p><strong>Command output</strong></p>
 <pre>[core]
 project = &lt;PROJECT_ID&gt;
 </pre>
 <p>If it is not, you can set it with this command:</p>
-<pre><code language="language-bash" class="language-bash">gcloud config set project &lt;PROJECT_ID&gt;
-</code></pre>
+<pre>gcloud config set project &lt;PROJECT_ID&gt;
+</pre>
 <p><strong>Command output</strong></p>
 <pre>Updated property [core/project].
 </pre>
@@ -167,7 +189,7 @@ project = &lt;PROJECT_ID&gt;
 <p>After you decide which sample to start with, click the &#34;Deploy on Cloud Run&#34; button above. This will launch <a href="https://cloud.google.com/shell" target="_blank">Cloud Shell</a> (a web-based console to a virtual machine in the cloud) where the source will be cloned, then built into a deployable package (a docker container image), which is then uploaded to the <a href="https://cloud.google.com/container-registry" target="_blank">Google Container Registry</a>, and then deployed on <a href="https://cloud.google.com/run" target="_blank">Cloud Run</a>.</p>
 <p>When asked, specify the <code>us-central1</code> region.</p>
 <p>The screenshot below shows Cloud Shell output for microservice build and deployment</p>
-<p class="image-container"><img alt="welcome" src="img/b596945caf1fce3d.png"></p>
+<p class="image-container"><img alt="deploy-output" src="img/b596945caf1fce3d.png"></p>
 <h3 is-upgraded>Verify the microservice works</h3>
 <p>In Cloud Shell you can make a request to your newly deployed microservice, replacing YOUR_SERVICE_URL with the URL for your service (which is in Cloud Shell after the &#34;Your application is now live here&#34; line):</p>
 <pre>curl -d &#39;{
@@ -196,24 +218,214 @@ project = &lt;PROJECT_ID&gt;
 
       </google-codelab-step>
     
-      <google-codelab-step label="Make Changes" duration="0">
-        
+      <google-codelab-step label="Make &amp; Deploy Changes" duration="0">
+        <p>Before you can make changes you need to setup some information in Cloud Shell about the GCP project and the sample you used. First list your GCP projects:</p>
+<pre>gcloud projects list
+</pre>
+<p>Copy the newly created <code>PROJECT_ID</code> from the first column and paste it into the following command (replacing <code>YOUR_PROJECT_ID</code> with your actual Project ID), in order to set an environment variable that we will use in later commands:</p>
+<pre>export PROJECT_ID=YOUR_PROJECT_ID
+</pre>
+<p>Now set another environment variable for the sample you used so in later commands we can specify the correct directory and service name:</p>
+<pre># Copy and paste ONLY ONE of these
+export SAMPLE=kotlin-micronaut
+export SAMPLE=kotlin-quarkus
+export SAMPLE=kotlin-springboot
+export SAMPLE=java-quarkus
+export SAMPLE=java-springboot
+export SAMPLE=go
+export SAMPLE=nodejs
+export SAMPLE=python
+</pre>
+<p>Now, you can edit the source for your microservice from within Cloud Shell. To open the Cloud Shell web-based editor, run this command:</p>
+<pre>cloudshell edit cloudbowl-microservice-game/samples/$SAMPLE/README.md
+</pre>
+<p>You will then see the editor and you can make change there.</p>
+<p class="image-container"><img alt="make-editor" src="img/e46b213d05592155.png"></p>
+<p><em>Cloud Shell with the editor with the sample project open</em></p>
+<p>After saving your changes, make sure you are in the correct sample directory in Cloud Shell:</p>
+<p><strong>Important</strong>: Make sure you run this command in the <strong>same</strong> terminal you set for <code>$PROJECT_ID</code> and <code>$SAMPLE</code>.</p>
+<pre>cd cloudbowl-microservice-game/samples/$SAMPLE
+</pre>
+<p>Then run the command in the <code>README.md</code> file, for instance:</p>
+<pre># Python Flask
+pip install -r requirements.txt
+python3 main.py
+</pre>
+<p>Once the application is running, send a HTTP POST request to the local port in other terminal tab:</p>
+<pre>curl -d &#39;{
+  &#34;_links&#34;: {
+    &#34;self&#34;: {
+      &#34;href&#34;: &#34;https://foo.com&#34;
+    }
+  },
+  &#34;arena&#34;: {
+    &#34;dims&#34;: [4,3],
+    &#34;state&#34;: {
+      &#34;https://foo.com&#34;: {
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 0,
+        &#34;direction&#34;: &#34;N&#34;,
+        &#34;wasHit&#34;: false,
+        &#34;score&#34;: 0
+      }
+    }
+  }
+}&#39; -H &#34;Content-Type: application/json&#34; -X POST -w &#34;\n&#34; \
+  http://localhost:8080
+</pre>
+<p>You should see the response string of either <code>F</code>, <code>L</code>, <code>R</code>, or <code>T</code>.</p>
+<p>When you are ready to deploy your changes, build your project in Cloud Shell using the <code>pack</code> command. This command uses Buildpacks to detect the project type, compile it, and create the deployable artifact (a docker container image).</p>
+<pre># Make sure you are in a Cloud Shell tab where you set the PROJECT_ID
+# and SAMPLE env vars. Otherwise, set them again.
+pack build gcr.io/$PROJECT_ID/$SAMPLE \
+  --path ~/cloudbowl-microservice-game/samples/$SAMPLE \
+  --builder gcr.io/buildpacks/builder
+</pre>
+<p>Now that your container image has been created, use the docker command (in Cloud Shell) to push the container image to the Google Container Registry so that it can then be accessed by Cloud Run:</p>
+<pre>docker push gcr.io/$PROJECT_ID/$SAMPLE
+</pre>
+<p>Now deploy the new version on Cloud Run:</p>
+<pre><code>gcloud run deploy $SAMPLE \
+          --project=$PROJECT_ID \
+          --platform=managed \
+          --region=us-central1 \
+          --image=gcr.io/$PROJECT_ID/$SAMPLE \
+          --allow-unauthenticated
+</code></pre>
+<p>Now the Leaderboard will use your new version!</p>
 
-      </google-codelab-step>
-    
-      <google-codelab-step label="Join the Leaderboard" duration="0">
-        
 
       </google-codelab-step>
     
       <google-codelab-step label="Delivery" duration="0">
-        
+        <h4 is-upgraded>Set up Source Code Management</h4>
+<p>Setup GitHub so you can collaborate with your team on your microservice:</p>
+<ol type="1">
+<li><a href="https://github.com/" target="_blank">Login to GitHub</a></li>
+<li><a href="https://github.com/new" target="_blank">Create a new repo</a></li>
+</ol>
+<h4 is-upgraded>Push your code with the git CLI</h4>
+<ol type="1">
+<li>Follow the <a href="https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token" target="_blank">git over https with a personal access token instructions</a></li>
+<li>Choose &#34;repo&#34; scope</li>
+<li>Setup git:  <pre><code>git config --global credential.helper \
+&#39;cache --timeout=172800&#39;
+git config --global push.default current
+git config --global user.email &#34;YOUR@EMAIL&#34;
+git config --global user.name &#34;YOUR NAME&#34;
+</code></pre>
+</li>
+<li>Set environment variables for the GitHub org and repo <code>https://github.com/ORG/REPO</code></li>
+</ol>
+<pre>export GITHUB_ORG=YOUR_GITHUB_ORG
+export GITHUB_REPO=YOUR_GITHUB_REPO
+</pre>
+<ol type="1">
+<li>Push your code to the new repo</li>
+</ol>
+<pre># Make sure the SAMPLE env var is still set. If not, re-set it.
+cd ~/cloudbowl-microservice-game/samples/$SAMPLE
+git init
+git add .
+git commit -m init
+git remote add origin https://github.com/$GITHUB_ORG/$GITHUB_REPO.git
+git branch -M main
+
+# This will now ask for your GitHub username &amp; password
+# for the password use the personal access token
+git push -u origin main
+</pre>
+<ol type="1">
+<li>After making any changes you can commit and push the changes to GitHub:</li>
+</ol>
+<pre>git add .
+git status
+git diff --staged
+git commit -am &#34;my changes&#34;
+git push
+</pre>
+<p>Now you can <code>git clone</code> from the repo to your local machine and edit the code there. Just make sure before make any change, <code>git pull</code> first to ensure the consistency of the code version.</p>
+<h4 is-upgraded>Setup Cloud Run Continuous Deployment</h4>
+<p>With your SCM setup on GitHub you can now setup Continuous Delivery so that every time new commits are pushed to the <code>main</code> branch, Cloud Build will automatically build and deploy the changes. You can also add Continuous Integration which runs your tests before deploying, but that step has been left as an exercise for you since the out-of-the-box samples do not contain any tests.</p>
+<ol type="1">
+<li><a href="https://console.cloud.google.com/run" target="_blank">In the Cloud console</a>, go to your Cloud Run service</li>
+<li>Click the &#34;SET UP CONTINUOUS DEPLOYMENT&#34; button</li>
+<li>Authenticate with GitHub and select your microservice&#39;s repository</li>
+</ol>
+<p class="image-container"><img alt="delivery-source" src="img/10eb22bbf9e00a9f.png"></p>
+<p>In this step, you might have to install Cloud Built App on GitHub.</p>
+<ol type="1">
+<li>Select your GitHub repo and set the branch to: <code>^main$</code></li>
+</ol>
+<p class="image-container"><img alt="delivery-select" src="img/338f1c00f33d2f65.png"></p>
+<ol type="1">
+<li>Set the Build Type to use Buildpacks</li>
+<li>Click Save to setup Continues Deployment</li>
+</ol>
+<p>If the build success there should be a litter check mark in the repo</p>
+<p class="image-container"><img alt="delivery-check" src="img/e49a1c44f2cec4e4.jpg"></p>
+<p>If you encounter any problem during the build, you could always check the logs in your <a href="https://console.cloud.google.com/run" target="_blank">Cloud Run Console</a></p>
+
 
       </google-codelab-step>
     
-      <google-codelab-step label="Congratulations" duration="0">
-        <p>Congratulations, you&#39;ve successfully built and deployed a microservice. Good luck!</p>
-<h3 is-upgraded>Reference Docs</h3>
+      <google-codelab-step label="Join the Rainbow Rumpus" duration="0">
+        <p>Congratulations, you&#39;ve successfully built and deployed a microservice.</p>
+<p>Now is time to test your microservice on the Rainbow Rumpus.</p>
+<ol type="1">
+<li>Visit the <a href="https://events.google.com/io/adventure?lng=en" target="_blank">Google I/O Adventure</a></li>
+<li>Create your Avatar</li>
+<li>Visit Google Cloud Dome</li>
+</ol>
+<p class="image-container"><img alt="adventure" src="img/b04ad0598c6cd8ef.png"></p>
+<ol type="1">
+<li>Reach to the Rainbow Rumpus dashboard</li>
+</ol>
+<p class="image-container"><img alt="arena" src="img/b53e36ecba371b05.png"></p>
+<p>Your should be redirected to <a href="https://rainbowrumpus.dev/" target="_blank">rainbowrumpus.dev</a></p>
+<ol type="1">
+<li>Join the game with your ID and microservice URL</li>
+<li>Now you should see your avatar in the arena</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Observability" duration="0">
+        <p>Things break. Observability gives us the ability to know when that happens and diagnose why. Metrics show us data about the health and usage of our service. Logs shows us the manually instrumented information emitted from our service. Alerts allow us to be notified when something goes wrong. Let&#39;s explore each of those further.</p>
+<h4 is-upgraded>Metrics</h4>
+<ol type="1">
+<li>Find your service in the <a href="https://console.cloud.google.com/run" target="_blank">list of Cloud Run services</a></li>
+<li>Click on your service&#39;s name to visit it&#39;s metric dashboard</li>
+</ol>
+<p class="image-container"><img alt="dashboard" src="img/673d1d6fdb75facb.png"></p>
+<ol type="1">
+<li>Click on a metric&#39;s ⋮ menu, then select &#34;View in Metrics Explorer&#34;</li>
+<li>You can now change resource metrics, filters, grouping, and other options.</li>
+</ol>
+<h4 is-upgraded>Logs</h4>
+<p>STDOUT output from services is sent to the Google Cloud Logging system. You can access a basic log view from the Cloud Run service admin page, like:</p>
+<p class="image-container"><img alt="logs" src="img/5845f9f8032185a4.png"></p>
+<p>In the Cloud Run logs you can filter by severity and filter the logs. For more flexibility click: <img alt="button" src="img/186fdb0e6d39a6ca.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Cleaning Up" duration="0">
+        <p>While Cloud Run does not charge when the service is not in use, you might still be charged for storing the built container image.</p>
+<p>You can either delete your GCP project to avoid incurring charges, which will stop billing for all the resources used within that project, or simply delete your container image using this command:</p>
+<pre>gcloud container images delete &#34;gcr.io/$PROJECT_ID/$SAMPLE&#34;
+</pre>
+<p>To delete your Cloud Run services, use these commands:</p>
+<pre>gcloud run services delete hello --platform managed --region $REGION --quiet
+gcloud run services delete hello-again --platform managed --region $REGION --quiet
+</pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="What&#39;s next?" duration="0">
+        <p>Many other languages are documented to get started with Cloud Run - you can find instructions for Go, Node.js, Java, C#, PHP, Ruby, Shell scripts, and others here: <a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy" target="_blank">cloud.google.com/run/docs/quickstarts/build-and-deploy</a></p>
 <ul>
 <li><a href="https://cloud.google.com/run/docs/" target="_blank">Cloud Run Docs</a></li>
 </ul>
