@@ -1,4 +1,4 @@
-## [POP Guide (test.)](https://kangyuw.github.io/pop_documentation/index.html#0)
+## [POP Guide](https://kangyuw.github.io/pop_documentation/index.html#0)
 
 > This test version of the POP Guide contain the rainbow rumpus, which we will NOT use for the POP event
 > Instead, we will use simpler approach called "Leaderboard"
