@@ -29,7 +29,7 @@
     
       <google-codelab-step label="Introduction" duration="3">
         <h2 class="checklist" is-upgraded>What You&#39;ll Learn</h2>
-<p>Welcome to <code>TBD</code>!</p>
+<p>Welcome to TBD!</p>
 <p>Let&#39;s get to know how GCP - Google Cloud Platform help developers to deploy their projects with automatically pipeline.</p>
 <p>This event will walk through the following steps.</p>
 <ul>
@@ -37,37 +37,16 @@
 <li>Deploy the microservice on Cloud Run</li>
 <li>Buildup automatic pipeline on Cloud Run</li>
 </ul>
-<p>At the end of the event, you have to submit your microservice to the <strong>Leaderboard</strong>.</p>
-<h3 is-upgraded>Microservice Rainbow Rumpus</h3>
+<p>At the end of the event, you have to submit your microservice to the <a href="https://leaderboard-service-oy5tnj23ga-ue.a.run.app/" target="_blank"><strong>Leaderboard</strong></a>.</p>
+<h2 is-upgraded>Leader board</h2>
+<p class="image-container"><img alt="leaderboard" src="img/b9db31475fa43910.png"></p>
 <p>The host will send the HTTP POST request. And the microservice should response with the following JSON structure:</p>
 <pre><code language="language-JSON" class="language-JSON">{
-  &#34;_links&#34;: {
-    &#34;self&#34;: {
-      &#34;href&#34;: &#34;https://YOUR_SERVICE_URL&#34;
-    }
-  },
-  &#34;arena&#34;: {
-    &#34;dims&#34;: [4,3], // width, height
-    &#34;state&#34;: {
-      &#34;https://A_PLAYERS_URL&#34;: {
-        &#34;x&#34;: 0, // zero-based x position, where 0 = left
-        &#34;y&#34;: 0, // zero-based y position, where 0 = top
-        &#34;direction&#34;: &#34;N&#34;, // N = North, W = West, S = South, E = East
-        &#34;wasHit&#34;: false,
-        &#34;score&#34;: 0
-      }
-      ... // also you and the other players
-    }
-  }
+  &#34;username&#34;: &#34;Kang&#34;, //The registered username
+  &#34;flag&#34;: &#34;jplOsDIaFLhcMRlS&#34; //The 16-word random generated string
 }
 </code></pre>
-<p>Your HTTP response must be status code 200 (OK) with a response body containing your next move, encoded as a single uppercase character of either:</p>
-<pre>F &lt;- move Forward
-R &lt;- turn Right
-L &lt;- turn Left
-T &lt;- Throw
-</pre>
-<p>That&#39;s all there is to it! Let&#39;s walk through deploying a microservice on Cloud Run, a Google Cloud service for running microservices and other applications.</p>
+<p>After the host receive the JSON response. It will update the leaderboard.</p>
 
 
       </google-codelab-step>
@@ -108,7 +87,6 @@ T &lt;- Throw
 <li>Run the following command in Cloud Shell to confirm that you are authenticated:</li>
 </ol>
 <pre>gcloud auth list
-
 </pre>
 <p><strong>Command output</strong></p>
 <pre> Credentialed Accounts
@@ -149,41 +127,21 @@ project = &lt;PROJECT_ID&gt;
 </td><td colspan="1" rowspan="1"><p>Description</p>
 </td><td colspan="1" rowspan="1"><p>Deploy</p>
 </td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="go" target="_blank">go</a></p>
-</td><td colspan="1" rowspan="1"><p>Go Lang</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/go" target="_blank">Run on Google Cloud</a></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="java-quarkus" target="_blank">java-quarkus</a></p>
-</td><td colspan="1" rowspan="1"><p>Java + Quarkus</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/java-quarkus" target="_blank">Run on Google Cloud</a></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="java-springboot" target="_blank">java-springboot</a></p>
-</td><td colspan="1" rowspan="1"><p>Java + Spring Boot</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/java-springboot" target="_blank">Run on Google Cloud</a></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="kotlin-micronaut" target="_blank">kotlin-micronaut</a></p>
-</td><td colspan="1" rowspan="1"><p>Kotlin + Micronaut</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-micronaut" target="_blank">Run on Google Cloud</a></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="kotlin-quarkus" target="_blank">kotlin-quarkus</a></p>
-</td><td colspan="1" rowspan="1"><p>Kotlin + Quarkus</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-quarkus" target="_blank">Run on Google Cloud</a></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="kotlin-springboot" target="_blank">kotlin-springboot</a></p>
-</td><td colspan="1" rowspan="1"><p>Kotlin + Spring Boot</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-springboot" target="_blank">Run on Google Cloud</a></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="nodejs" target="_blank">nodejs</a></p>
-</td><td colspan="1" rowspan="1"><p>Node.js</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/nodejs" target="_blank">Run on Google Cloud</a></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="python" target="_blank">python</a></p>
+<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-python-flask" target="_blank">python-flask</a></p>
 </td><td colspan="1" rowspan="1"><p>Python + Flask</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/python" target="_blank">Run on Google Cloud</a></p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-python-flask" target="_blank">Run on Google Cloud</a></p>
 </td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="scala-play" target="_blank">scala-play</a></p>
-</td><td colspan="1" rowspan="1"><p>Scala + Play Framework</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/scala-play" target="_blank">Run on Google Cloud</a></p>
+<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-go" target="_blank">go</a></p>
+</td><td colspan="1" rowspan="1"><p>Go Lang</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-go" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-nodejs" target="_blank">nodejs</a></p>
+</td><td colspan="1" rowspan="1"><p>Node.js</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-nodejs" target="_blank">Run on Google Cloud</a></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-java-springboot" target="_blank">java-springboot</a></p>
+</td><td colspan="1" rowspan="1"><p>Java + Spring Boot</p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-java-springboot" target="_blank">Run on Google Cloud</a></p>
 </td></tr>
 </table>
 <p>After you decide which sample to start with, click the &#34;Deploy on Cloud Run&#34; button above. This will launch <a href="https://cloud.google.com/shell" target="_blank">Cloud Shell</a> (a web-based console to a virtual machine in the cloud) where the source will be cloned, then built into a deployable package (a docker container image), which is then uploaded to the <a href="https://cloud.google.com/container-registry" target="_blank">Google Container Registry</a>, and then deployed on <a href="https://cloud.google.com/run" target="_blank">Cloud Run</a>.</p>
@@ -191,29 +149,7 @@ project = &lt;PROJECT_ID&gt;
 <p>The screenshot below shows Cloud Shell output for microservice build and deployment</p>
 <p class="image-container"><img alt="deploy-output" src="img/b596945caf1fce3d.png"></p>
 <h3 is-upgraded>Verify the microservice works</h3>
-<p>In Cloud Shell you can make a request to your newly deployed microservice, replacing YOUR_SERVICE_URL with the URL for your service (which is in Cloud Shell after the &#34;Your application is now live here&#34; line):</p>
-<pre>curl -d &#39;{
-  &#34;_links&#34;: {
-    &#34;self&#34;: {
-      &#34;href&#34;: &#34;https://foo.com&#34;
-    }
-  },
-  &#34;arena&#34;: {
-    &#34;dims&#34;: [4,3],
-    &#34;state&#34;: {
-      &#34;https://foo.com&#34;: {
-        &#34;x&#34;: 0,
-        &#34;y&#34;: 0,
-        &#34;direction&#34;: &#34;N&#34;,
-        &#34;wasHit&#34;: false,
-        &#34;score&#34;: 0
-      }
-    }
-  }
-}&#39; -H &#34;Content-Type: application/json&#34; -X POST -w &#34;\n&#34; \
-  https://YOUR_SERVICE_URL
-</pre>
-<p>You should see the response string of either <code>F</code>, <code>L</code>, <code>R</code>, or <code>T</code>.</p>
+<p>In Cloud Shell you can make a request to your newly deployed microservice, replacing YOUR_SERVICE_URL with the URL for your service (which is in Cloud Shell after the &#34;Your application is now live here&#34; line).</p>
 
 
       </google-codelab-step>
@@ -227,10 +163,6 @@ project = &lt;PROJECT_ID&gt;
 </pre>
 <p>Now set another environment variable for the sample you used so in later commands we can specify the correct directory and service name:</p>
 <pre># Copy and paste ONLY ONE of these
-export SAMPLE=kotlin-micronaut
-export SAMPLE=kotlin-quarkus
-export SAMPLE=kotlin-springboot
-export SAMPLE=java-quarkus
 export SAMPLE=java-springboot
 export SAMPLE=go
 export SAMPLE=nodejs
@@ -252,27 +184,6 @@ pip install -r requirements.txt
 python3 main.py
 </pre>
 <p>Once the application is running, send a HTTP POST request to the local port in other terminal tab:</p>
-<pre>curl -d &#39;{
-  &#34;_links&#34;: {
-    &#34;self&#34;: {
-      &#34;href&#34;: &#34;https://foo.com&#34;
-    }
-  },
-  &#34;arena&#34;: {
-    &#34;dims&#34;: [4,3],
-    &#34;state&#34;: {
-      &#34;https://foo.com&#34;: {
-        &#34;x&#34;: 0,
-        &#34;y&#34;: 0,
-        &#34;direction&#34;: &#34;N&#34;,
-        &#34;wasHit&#34;: false,
-        &#34;score&#34;: 0
-      }
-    }
-  }
-}&#39; -H &#34;Content-Type: application/json&#34; -X POST -w &#34;\n&#34; \
-  http://localhost:8080
-</pre>
 <p>You should see the response string of either <code>F</code>, <code>L</code>, <code>R</code>, or <code>T</code>.</p>
 <p>When you are ready to deploy your changes, build your project in Cloud Shell using the <code>pack</code> command. This command uses Buildpacks to detect the project type, compile it, and create the deployable artifact (a docker container image).</p>
 <pre># Make sure you are in a Cloud Shell tab where you set the PROJECT_ID
@@ -369,24 +280,13 @@ git push
 
       </google-codelab-step>
     
-      <google-codelab-step label="Join the Rainbow Rumpus" duration="0">
+      <google-codelab-step label="Join the Leaderboard" duration="0">
         <p>Congratulations, you&#39;ve successfully built and deployed a microservice.</p>
-<p>Now is time to test your microservice on the Rainbow Rumpus.</p>
-<ol type="1">
-<li>Visit the <a href="https://events.google.com/io/adventure?lng=en" target="_blank">Google I/O Adventure</a></li>
-<li>Create your Avatar</li>
-<li>Visit Google Cloud Dome</li>
-</ol>
-<p class="image-container"><img alt="adventure" src="img/b04ad0598c6cd8ef.png"></p>
-<ol type="1">
-<li>Reach to the Rainbow Rumpus dashboard</li>
-</ol>
-<p class="image-container"><img alt="arena" src="img/b53e36ecba371b05.png"></p>
-<p>Your should be redirected to <a href="https://rainbowrumpus.dev/" target="_blank">rainbowrumpus.dev</a></p>
-<ol type="1">
-<li>Join the game with your ID and microservice URL</li>
-<li>Now you should see your avatar in the arena</li>
-</ol>
+<p>Now is time to test your microservice on the Leaderboard.</p>
+<p class="image-container"><img alt="join" src="img/26c1cc9814012457.png"></p>
+<p>To join the Leaderboard, open Leaderboard click join button on the page. The Leaderboard will assign an random generated 16-word flag, your microservice should response with this flag. You should see your username be updated to the leaderboard with the complete status of ✘.</p>
+<p class="image-container"><img alt="join" src="img/af146674f6cbd5ea.png"></p>
+<p>Then, to verify your microservice is working, click the &#34;Verify Microservice&#34; button, input your username and verified the microservice. If everything goes well, your complete status should be changed to ✔️.</p>
 
 
       </google-codelab-step>
@@ -425,7 +325,7 @@ gcloud run services delete hello-again --platform managed --region $REGION --qui
       </google-codelab-step>
     
       <google-codelab-step label="What&#39;s next?" duration="0">
-        <p>Many other languages are documented to get started with Cloud Run - you can find instructions for Go, Node.js, Java, C#, PHP, Ruby, Shell scripts, and others here: <a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy" target="_blank">cloud.google.com/run/docs/quickstarts/build-and-deploy</a></p>
+        <p>Many other languages are documented to get started with Cloud Run - you can find instructions for Go, Node.js, Java, C#, PHP, Ruby, Shell scripts, and others here: https://cloud.google.com/run/docs/quickstarts/build-and-deploy</p>
 <ul>
 <li><a href="https://cloud.google.com/run/docs/" target="_blank">Cloud Run Docs</a></li>
 </ul>

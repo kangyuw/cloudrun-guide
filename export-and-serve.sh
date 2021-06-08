@@ -4,7 +4,7 @@ clear
 
 echo "export the markdown file"
 
-claat export POP-guide-draft.md
+claat export POP-guide.md
 
 cd docs
 

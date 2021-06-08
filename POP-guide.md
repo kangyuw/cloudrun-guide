@@ -23,11 +23,11 @@ This event will walk through the following steps.
 - Deploy the microservice on Cloud Run
 - Buildup automatic pipeline on Cloud Run
 
-At the end of the event, you have to submit your microservice to the **Leaderboard**.
+At the end of the event, you have to submit your microservice to the **[Leaderboard](https://leaderboard-service-oy5tnj23ga-ue.a.run.app/)**.
 
-#### Leader board
+### Leader board
 
-<!-- TODO: The picture of the Leaderboard -->
+![leaderboard](assets/leaderboard-index.png)
 
 The host will send the HTTP POST request. And the microservice should response with the following JSON structure:
 
@@ -99,7 +99,6 @@ Once connected to Cloud Shell, you should see that you are already authenticated
 
 ``` console
 gcloud auth list
-
 ```
 
 **Command output**
@@ -152,15 +151,11 @@ There are numerous sample microservices you can start from:
 
 |Sample|Description|Deploy|
 |---|---|---|
-|[go](go)|Go Lang|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/go)|
-|[java-quarkus](java-quarkus)|Java + Quarkus|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/java-quarkus)|
-|[java-springboot](java-springboot)|Java + Spring Boot|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/java-springboot)|
-|[kotlin-micronaut](kotlin-micronaut)|Kotlin + Micronaut|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-micronaut)|
-|[kotlin-quarkus](kotlin-quarkus)|Kotlin + Quarkus|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-quarkus)|
-|[kotlin-springboot](kotlin-springboot)|Kotlin + Spring Boot|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/kotlin-springboot)|
-|[nodejs](nodejs)|Node.js|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/nodejs)|
-|[python](python)|Python + Flask|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/python)|
-|[scala-play](scala-play)|Scala + Play Framework|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/GoogleCloudPlatform/cloudbowl-microservice-game.git&dir=samples/scala-play)|
+|[python-flask](https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-python-flask)|Python + Flask|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-python-flask)|
+|[go](https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-go)|Go Lang|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-go)|
+|[nodejs](https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-nodejs)|Node.js|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-nodejs)|
+|[java-springboot](https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-java-springboot)|Java + Spring Boot|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-java-springboot)|
+
 
 After you decide which sample to start with, click the "Deploy on Cloud Run" button above. This will launch [Cloud Shell](https://cloud.google.com/shell) (a web-based console to a virtual machine in the cloud) where the source will be cloned, then built into a deployable package (a docker container image), which is then uploaded to the [Google Container Registry](https://cloud.google.com/container-registry), and then deployed on [Cloud Run](https://cloud.google.com/run).
 
@@ -172,34 +167,9 @@ The screenshot below shows Cloud Shell output for microservice build and deploym
 
 #### Verify the microservice works
 
-In Cloud Shell you can make a request to your newly deployed microservice, replacing YOUR_SERVICE_URL with the URL for your service (which is in Cloud Shell after the "Your application is now live here" line):
+In Cloud Shell you can make a request to your newly deployed microservice, replacing YOUR_SERVICE_URL with the URL for your service (which is in Cloud Shell after the "Your application is now live here" line).
 
-<!-- TODO: This part should be replace by simple http post request -->
-
-``` console
-curl -d '{
-  "_links": {
-    "self": {
-      "href": "https://foo.com"
-    }
-  },
-  "arena": {
-    "dims": [4,3],
-    "state": {
-      "https://foo.com": {
-        "x": 0,
-        "y": 0,
-        "direction": "N",
-        "wasHit": false,
-        "score": 0
-      }
-    }
-  }
-}' -H "Content-Type: application/json" -X POST -w "\n" \
-  https://YOUR_SERVICE_URL
-```
-
-You should see the response string of either ```F```, ```L```, ```R```, or ```T```.
+<!-- TODO: attached a picture of microservice being deployed -->
 
 <!-- ------------------------ -->
 ## Make & Deploy Changes
@@ -218,13 +188,8 @@ export PROJECT_ID=YOUR_PROJECT_ID
 
 Now set another environment variable for the sample you used so in later commands we can specify the correct directory and service name:
 
-<!-- TODO: Those should be replace by our own samples -->
 ``` console
 # Copy and paste ONLY ONE of these
-export SAMPLE=kotlin-micronaut
-export SAMPLE=kotlin-quarkus
-export SAMPLE=kotlin-springboot
-export SAMPLE=java-quarkus
 export SAMPLE=java-springboot
 export SAMPLE=go
 export SAMPLE=nodejs
@@ -258,31 +223,6 @@ python3 main.py
 ```
 
 Once the application is running, send a HTTP POST request to the local port in other terminal tab:
-
-<!-- TODO: This command should be replace by simple post request -->
-
-``` console
-curl -d '{
-  "_links": {
-    "self": {
-      "href": "https://foo.com"
-    }
-  },
-  "arena": {
-    "dims": [4,3],
-    "state": {
-      "https://foo.com": {
-        "x": 0,
-        "y": 0,
-        "direction": "N",
-        "wasHit": false,
-        "score": 0
-      }
-    }
-  }
-}' -H "Content-Type: application/json" -X POST -w "\n" \
-  http://localhost:8080
-```
 
 You should see the response string of either ```F```, ```L```, ```R```, or ```T```.
 
@@ -407,8 +347,13 @@ Congratulations, you've successfully built and deployed a microservice.
 
 Now is time to test your microservice on the Leaderboard.
 
-<!-- TODO: Implement the Leaderboard -->
-To join the Leaderboard, open Leaderboard click join button on the page. The Leaderboard will assign an random generated 16-word flag, your microservice should response with this flag.
+![join](assets/leaderboard-join.png)
+
+To join the Leaderboard, open Leaderboard click join button on the page. The Leaderboard will assign an random generated 16-word flag, your microservice should response with this flag. You should see your username be updated to the leaderboard with the complete status of ✘.
+
+![join](assets/leaderboard-verify.png)
+
+Then, to verify your microservice is working, click the "Verify Microservice" button, input your username and verified the microservice. If everything goes well, your complete status should be changed to ✔️.
 
 <!-- ------------------------ -->
 ## Observability
