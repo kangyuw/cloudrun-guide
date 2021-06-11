@@ -11,12 +11,15 @@
 1. Follow the [instruction](https://github.com/googlecodelabs/tools/tree/master/claat) to install Codelabs command line tool ```claat```.
 2. Run the following claat command to transform the markdown document into the ```docs``` folder.
 
-```claat export Cloudrun-guide.md```
+```
+claat export Cloudrun-guide.md
+mv docs public
+```
 
 3. To test the codelab page on the local machine, use the following commands.
 
 ```
-cd docs
+cd public
 claat serve
 ```
 

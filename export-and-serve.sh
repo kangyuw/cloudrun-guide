@@ -2,10 +2,14 @@
 
 clear
 
+if [ -d "public" ]; then
+    rm -r public
+fi
+
 echo "export the markdown file"
 
-claat export POP-guide.md
+claat export Cloudrun-guide.md
+mv docs public
 
-cd docs
-
+cd public
 claat serve

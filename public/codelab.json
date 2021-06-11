@@ -9,7 +9,7 @@
   "title": "Deploy with GCP",
   "authors": "Kang",
   "summary": "Deploy with GCP",
-  "source": "",
+  "source": "Cloudrun-guide.md",
   "theme": "",
   "status": [
     "published"

@@ -5,9 +5,9 @@ pages:
   script:
     - mkdir .public
     - cp -r * .public
-    - mv .public docs
+    - mv .public public
   artifacts:
     paths:
-      - docs
+      - public
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
