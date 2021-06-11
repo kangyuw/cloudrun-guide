@@ -151,10 +151,9 @@ There are numerous sample microservices you can start from:
 
 |Sample|Description|Deploy|
 |---|---|---|
-|[python-flask](https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-python-flask)|Python + Flask|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-python-flask)|
-|[go](https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-go)|Go Lang|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-go)|
-|[nodejs](https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-nodejs)|Node.js|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-nodejs)|
-|[java-springboot](https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-java-springboot)|Java + Spring Boot|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-java-springboot)|
+|[python-flask](https://github.com/kangyuw/cloudrun-leaderboard/tree/main/samples/python-flask)|Python + Flask|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/cloudrun-leaderboard.git&dir=samples/python-flask)|
+|[go](https://github.com/kangyuw/cloudrun-leaderboard/tree/main/samples/go)|Go Lang|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/cloudrun-leaderboard.git&dir=samples/go)|
+|[nodejs](https://github.com/kangyuw/cloudrun-leaderboard/tree/main/samples/nodejs)|Node.js|[Run on Google Cloud](https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/cloudrun-leaderboard.git&dir=samples/nodejs)|
 
 
 After you decide which sample to start with, click the "Deploy on Cloud Run" button above. This will launch [Cloud Shell](https://cloud.google.com/shell) (a web-based console to a virtual machine in the cloud) where the source will be cloned, then built into a deployable package (a docker container image), which is then uploaded to the [Google Container Registry](https://cloud.google.com/container-registry), and then deployed on [Cloud Run](https://cloud.google.com/run).
@@ -190,7 +189,6 @@ Now set another environment variable for the sample you used so in later command
 
 ``` console
 # Copy and paste ONLY ONE of these
-export SAMPLE=java-springboot
 export SAMPLE=go
 export SAMPLE=nodejs
 export SAMPLE=python
@@ -402,6 +400,8 @@ gcloud run services delete hello-again --platform managed --region $REGION --qui
 
 <!-- TODO: provide some useful tutorial or documentation to start using gcloud -->
 
-Many other languages are documented to get started with Cloud Run - you can find instructions for Go, Node.js, Java, C#, PHP, Ruby, Shell scripts, and others here: https://cloud.google.com/run/docs/quickstarts/build-and-deploy
+Many other languages are documented to get started with Cloud Run - you can find instructions for Go, Node.js, Java, C#, PHP, Ruby, Shell scripts, and others here
 
-+ [Cloud Run Docs](https://cloud.google.com/run/docs/)
+* [Cloud Run Quickstarts](https://cloud.google.com/run/docs/quickstarts/build-and-deploy)
+
+* [Cloud Run Docs](https://cloud.google.com/run/docs/)

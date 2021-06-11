@@ -127,21 +127,17 @@ project = &lt;PROJECT_ID&gt;
 </td><td colspan="1" rowspan="1"><p>Description</p>
 </td><td colspan="1" rowspan="1"><p>Deploy</p>
 </td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-python-flask" target="_blank">python-flask</a></p>
+<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/cloudrun-leaderboard/tree/main/samples/python-flask" target="_blank">python-flask</a></p>
 </td><td colspan="1" rowspan="1"><p>Python + Flask</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-python-flask" target="_blank">Run on Google Cloud</a></p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/cloudrun-leaderboard.git&dir=samples/python-flask" target="_blank">Run on Google Cloud</a></p>
 </td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-go" target="_blank">go</a></p>
+<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/cloudrun-leaderboard/tree/main/samples/go" target="_blank">go</a></p>
 </td><td colspan="1" rowspan="1"><p>Go Lang</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-go" target="_blank">Run on Google Cloud</a></p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/cloudrun-leaderboard.git&dir=samples/go" target="_blank">Run on Google Cloud</a></p>
 </td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-nodejs" target="_blank">nodejs</a></p>
+<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/cloudrun-leaderboard/tree/main/samples/nodejs" target="_blank">nodejs</a></p>
 </td><td colspan="1" rowspan="1"><p>Node.js</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-nodejs" target="_blank">Run on Google Cloud</a></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><a href="https://github.com/kangyuw/pop_leaderboard/tree/main/samples/microservice-java-springboot" target="_blank">java-springboot</a></p>
-</td><td colspan="1" rowspan="1"><p>Java + Spring Boot</p>
-</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/pop_leaderboard.git&dir=samples/microservice-java-springboot" target="_blank">Run on Google Cloud</a></p>
+</td><td colspan="1" rowspan="1"><p><a href="https://deploy.cloud.run/?git_repo=https://github.com/kangyuw/cloudrun-leaderboard.git&dir=samples/nodejs" target="_blank">Run on Google Cloud</a></p>
 </td></tr>
 </table>
 <p>After you decide which sample to start with, click the &#34;Deploy on Cloud Run&#34; button above. This will launch <a href="https://cloud.google.com/shell" target="_blank">Cloud Shell</a> (a web-based console to a virtual machine in the cloud) where the source will be cloned, then built into a deployable package (a docker container image), which is then uploaded to the <a href="https://cloud.google.com/container-registry" target="_blank">Google Container Registry</a>, and then deployed on <a href="https://cloud.google.com/run" target="_blank">Cloud Run</a>.</p>
@@ -163,7 +159,6 @@ project = &lt;PROJECT_ID&gt;
 </pre>
 <p>Now set another environment variable for the sample you used so in later commands we can specify the correct directory and service name:</p>
 <pre># Copy and paste ONLY ONE of these
-export SAMPLE=java-springboot
 export SAMPLE=go
 export SAMPLE=nodejs
 export SAMPLE=python
@@ -325,8 +320,9 @@ gcloud run services delete hello-again --platform managed --region $REGION --qui
       </google-codelab-step>
     
       <google-codelab-step label="What&#39;s next?" duration="0">
-        <p>Many other languages are documented to get started with Cloud Run - you can find instructions for Go, Node.js, Java, C#, PHP, Ruby, Shell scripts, and others here: https://cloud.google.com/run/docs/quickstarts/build-and-deploy</p>
+        <p>Many other languages are documented to get started with Cloud Run - you can find instructions for Go, Node.js, Java, C#, PHP, Ruby, Shell scripts, and others here</p>
 <ul>
+<li><a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy" target="_blank">Cloud Run Quickstarts</a></li>
 <li><a href="https://cloud.google.com/run/docs/" target="_blank">Cloud Run Docs</a></li>
 </ul>
 
