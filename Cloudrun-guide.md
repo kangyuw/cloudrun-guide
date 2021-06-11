@@ -4,7 +4,7 @@ categories: Tutorial
 tags: RPT
 status: Published
 authors: Kang
-Feedback Link: https://github.com/kangyuw/pop_documentation
+Feedback Link: https://gitlab.com/kangyuw/cloudrun-guide/
 
 # Deploy with GCP
 <!-- ------------------------ -->

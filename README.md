@@ -1,4 +1,9 @@
-## [Deploy with GCP](https://kangyuw.github.io/pop_documentation/index.html#0)
+## [Deploy with GCP](https://kangyuw.gitlab.io/cloudrun-guide/#0)
+
+## Deploy the page
+
+1. Follow the [instruction](https://github.com/googlecodelabs/tools/tree/master/claat) to install Codelabs command line tool ```claat```.
+2. Run the following claat command to transform the markdown document 
 
 ## Reference
 
