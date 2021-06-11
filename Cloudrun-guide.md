@@ -168,7 +168,15 @@ The screenshot below shows Cloud Shell output for microservice build and deploym
 
 In Cloud Shell you can make a request to your newly deployed microservice, replacing YOUR_SERVICE_URL with the URL for your service (which is in Cloud Shell after the "Your application is now live here" line).
 
-<!-- TODO: attached a picture of microservice being deployed -->
+Now you could test your microsercice by using curl command.
+
+```bash
+curl -X POST YOUR_SERVICE_URL
+```
+
+The microservice should return the line of ```This is your $SAMPLE microservice.```
+
+Which the ```$SAMPLE``` is the microservice type of your choice.｛
 
 <!-- ------------------------ -->
 ## Make & Deploy Changes
@@ -191,13 +199,13 @@ Now set another environment variable for the sample you used so in later command
 # Copy and paste ONLY ONE of these
 export SAMPLE=go
 export SAMPLE=nodejs
-export SAMPLE=python
+export SAMPLE=python-flask
 ```
 
 Now, you can edit the source for your microservice from within Cloud Shell. To open the Cloud Shell web-based editor, run this command:
 
 ``` console
-cloudshell edit cloudbowl-microservice-game/samples/$SAMPLE/README.md
+cloudshell edit cloudrun-leaderboard/samples/$SAMPLE/README.md
 ```
 You will then see the editor and you can make change there.
 
@@ -210,7 +218,7 @@ After saving your changes, make sure you are in the correct sample directory in 
 **Important**: Make sure you run this command in the **same** terminal you set for ```$PROJECT_ID``` and ```$SAMPLE```.
 
 ``` console
-cd cloudbowl-microservice-game/samples/$SAMPLE
+cd cloudrun-leaderboard/samples/$SAMPLE
 ```
 
 Then run the command in the ```README.md``` file, for instance:
@@ -220,9 +228,7 @@ pip install -r requirements.txt
 python3 main.py
 ```
 
-Once the application is running, send a HTTP POST request to the local port in other terminal tab:
-
-You should see the response string of either ```F```, ```L```, ```R```, or ```T```.
+Once the application is running, send a HTTP POST request to the local port in other terminal tab.
 
 When you are ready to deploy your changes, build your project in Cloud Shell using the ```pack``` command. This command uses Buildpacks to detect the project type, compile it, and create the deployable artifact (a docker container image).
 
@@ -230,7 +236,7 @@ When you are ready to deploy your changes, build your project in Cloud Shell usi
 # Make sure you are in a Cloud Shell tab where you set the PROJECT_ID
 # and SAMPLE env vars. Otherwise, set them again.
 pack build gcr.io/$PROJECT_ID/$SAMPLE \
-  --path ~/cloudbowl-microservice-game/samples/$SAMPLE \
+  --path ~/cloudrun-leaderboard/samples/$SAMPLE \
   --builder gcr.io/buildpacks/builder
 ```
 
@@ -288,7 +294,7 @@ export GITHUB_REPO=YOUR_GITHUB_REPO
 
 ``` console
 # Make sure the SAMPLE env var is still set. If not, re-set it.
-cd ~/cloudbowl-microservice-game/samples/$SAMPLE
+cd ~/cloudrun-leaderboard/samples/$SAMPLE
 git init
 git add .
 git commit -m init
@@ -349,9 +355,18 @@ Now is time to test your microservice on the Leaderboard.
 
 To join the Leaderboard, open Leaderboard click join button on the page. The Leaderboard will assign an random generated 16-word flag, your microservice should response with this flag. You should see your username be updated to the leaderboard with the complete status of ✘.
 
-![join](assets/leaderboard-verify.png)
+![verify](assets/leaderboard-verify.png)
 
 Then, to verify your microservice is working, click the "Verify Microservice" button, input your username and verified the microservice. If everything goes well, your complete status should be changed to ✔️.
+
+Implement a simple json response to the post request with the following JSON structure:
+
+```JSON
+{
+  "username": "Kang", //The registered username
+  "flag": "jplOsDIaFLhcMRlS" //The 16-word random generated string
+}
+```
 
 <!-- ------------------------ -->
 ## Observability
@@ -391,8 +406,7 @@ gcloud container images delete "gcr.io/$PROJECT_ID/$SAMPLE"
 
 To delete your Cloud Run services, use these commands:
 ``` console
-gcloud run services delete hello --platform managed --region $REGION --quiet
-gcloud run services delete hello-again --platform managed --region $REGION --quiet
+gcloud run services delete $SAMPLE --platform managed --region $REGION --quiet
 ```
 
 <!-- ------------------------ -->

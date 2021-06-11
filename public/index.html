@@ -146,6 +146,11 @@ project = &lt;PROJECT_ID&gt;
 <p class="image-container"><img alt="deploy-output" src="img/b596945caf1fce3d.png"></p>
 <h3 is-upgraded>Verify the microservice works</h3>
 <p>In Cloud Shell you can make a request to your newly deployed microservice, replacing YOUR_SERVICE_URL with the URL for your service (which is in Cloud Shell after the &#34;Your application is now live here&#34; line).</p>
+<p>Now you could test your microsercice by using curl command.</p>
+<pre><code language="language-bash" class="language-bash">curl -X POST YOUR_SERVICE_URL
+</code></pre>
+<p>The microservice should return the line of <code>This is your $SAMPLE microservice.</code></p>
+<p>Which the <code>$SAMPLE</code> is the microservice type of your choice.｛</p>
 
 
       </google-codelab-step>
@@ -161,30 +166,29 @@ project = &lt;PROJECT_ID&gt;
 <pre># Copy and paste ONLY ONE of these
 export SAMPLE=go
 export SAMPLE=nodejs
-export SAMPLE=python
+export SAMPLE=python-flask
 </pre>
 <p>Now, you can edit the source for your microservice from within Cloud Shell. To open the Cloud Shell web-based editor, run this command:</p>
-<pre>cloudshell edit cloudbowl-microservice-game/samples/$SAMPLE/README.md
+<pre>cloudshell edit cloudrun-leaderboard/samples/$SAMPLE/README.md
 </pre>
 <p>You will then see the editor and you can make change there.</p>
 <p class="image-container"><img alt="make-editor" src="img/e46b213d05592155.png"></p>
 <p><em>Cloud Shell with the editor with the sample project open</em></p>
 <p>After saving your changes, make sure you are in the correct sample directory in Cloud Shell:</p>
 <p><strong>Important</strong>: Make sure you run this command in the <strong>same</strong> terminal you set for <code>$PROJECT_ID</code> and <code>$SAMPLE</code>.</p>
-<pre>cd cloudbowl-microservice-game/samples/$SAMPLE
+<pre>cd cloudrun-leaderboard/samples/$SAMPLE
 </pre>
 <p>Then run the command in the <code>README.md</code> file, for instance:</p>
 <pre># Python Flask
 pip install -r requirements.txt
 python3 main.py
 </pre>
-<p>Once the application is running, send a HTTP POST request to the local port in other terminal tab:</p>
-<p>You should see the response string of either <code>F</code>, <code>L</code>, <code>R</code>, or <code>T</code>.</p>
+<p>Once the application is running, send a HTTP POST request to the local port in other terminal tab.</p>
 <p>When you are ready to deploy your changes, build your project in Cloud Shell using the <code>pack</code> command. This command uses Buildpacks to detect the project type, compile it, and create the deployable artifact (a docker container image).</p>
 <pre># Make sure you are in a Cloud Shell tab where you set the PROJECT_ID
 # and SAMPLE env vars. Otherwise, set them again.
 pack build gcr.io/$PROJECT_ID/$SAMPLE \
-  --path ~/cloudbowl-microservice-game/samples/$SAMPLE \
+  --path ~/cloudrun-leaderboard/samples/$SAMPLE \
   --builder gcr.io/buildpacks/builder
 </pre>
 <p>Now that your container image has been created, use the docker command (in Cloud Shell) to push the container image to the Google Container Registry so that it can then be accessed by Cloud Run:</p>
@@ -230,7 +234,7 @@ export GITHUB_REPO=YOUR_GITHUB_REPO
 <li>Push your code to the new repo</li>
 </ol>
 <pre># Make sure the SAMPLE env var is still set. If not, re-set it.
-cd ~/cloudbowl-microservice-game/samples/$SAMPLE
+cd ~/cloudrun-leaderboard/samples/$SAMPLE
 git init
 git add .
 git commit -m init
@@ -280,8 +284,14 @@ git push
 <p>Now is time to test your microservice on the Leaderboard.</p>
 <p class="image-container"><img alt="join" src="img/26c1cc9814012457.png"></p>
 <p>To join the Leaderboard, open Leaderboard click join button on the page. The Leaderboard will assign an random generated 16-word flag, your microservice should response with this flag. You should see your username be updated to the leaderboard with the complete status of ✘.</p>
-<p class="image-container"><img alt="join" src="img/af146674f6cbd5ea.png"></p>
+<p class="image-container"><img alt="verify" src="img/af146674f6cbd5ea.png"></p>
 <p>Then, to verify your microservice is working, click the &#34;Verify Microservice&#34; button, input your username and verified the microservice. If everything goes well, your complete status should be changed to ✔️.</p>
+<p>Implement a simple json response to the post request with the following JSON structure:</p>
+<pre><code language="language-JSON" class="language-JSON">{
+  &#34;username&#34;: &#34;Kang&#34;, //The registered username
+  &#34;flag&#34;: &#34;jplOsDIaFLhcMRlS&#34; //The 16-word random generated string
+}
+</code></pre>
 
 
       </google-codelab-step>
@@ -312,8 +322,7 @@ git push
 <pre>gcloud container images delete &#34;gcr.io/$PROJECT_ID/$SAMPLE&#34;
 </pre>
 <p>To delete your Cloud Run services, use these commands:</p>
-<pre>gcloud run services delete hello --platform managed --region $REGION --quiet
-gcloud run services delete hello-again --platform managed --region $REGION --quiet
+<pre>gcloud run services delete $SAMPLE --platform managed --region $REGION --quiet
 </pre>
 
 
