@@ -3,9 +3,9 @@
 pages:
   stage: deploy
   script:
-    - mkdir .public
-    - cp -r * .public
-    - mv .public docs
+    - mkdir .docs
+    - cp -r * .docs
+    - mv .docs docs
   artifacts:
     paths:
       - docs
